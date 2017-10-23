@@ -1,0 +1,11 @@
+import urllib
+import urllib2
+
+values = {}
+  values['username'] = "Username" #输入用户名字
+  values['password'] = "Password" #输入密码
+  data = urllib.urlencode(values)
+  url = "url"
+  req = urllib2.Request(url,data)
+  res = urllib2.urlopen(req)
+print res.read()
