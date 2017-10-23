@@ -1,0 +1,13 @@
+######删掉代码前‘#’#######
+#import urllib2,urllib
+#user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+#values = {}
+#values['username'] = "USERNAME"
+#values['Password'] = "PASSWORD"
+#data = urllib.urlencode(values)
+#url = "url"
+#headers =  headers = { 'User-Agent' : 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'  ,
+                        'Referer':'url' }
+req = urllib2.Request(url,data,headers)
+res = urllib2.urlopen(req,timeout=5)
+print res.read()
