@@ -2,9 +2,7 @@
 #E-mail:ljjhacker123@gmail.com
 #Made by LJJ
 #2017-10-23
-#This PythonPortScanner only use by personal!
 # -*- coding:utf-8 -*-  
-# 2105-03-25  
 Port = [80, 21, 23, 22, 25, 110, 443, 1080, 3306, 3389, 1521, 1433]
 Server = ['HTTP', 'FTP', 'TELNET', 'SSH', 'SMTP', 'POP3', 'HTTPS', 'SOCKS', 'MYSQL', 'Misrosoft RDP', 'Oracle',
           'Sql Server']
